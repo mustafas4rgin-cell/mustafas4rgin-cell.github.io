@@ -2,28 +2,36 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sana Kavuşmama Kalan Zaman 💖</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background: #fff0f5;
       font-family: 'Courier New', monospace;
       color: #ff1493;
       text-align: center;
-      padding: 50px;
+      padding: 20px;
+      margin: 0;
     }
 
     h1 {
       font-size: 2.5rem;
+      margin-top: 20px;
     }
 
     .countdown {
-      font-size: 2rem;
-      margin-top: 20px;
+      font-size: 1.8rem;
+      margin-top: 15px;
     }
 
     .heart {
       font-size: 3rem;
       animation: pulse 1s infinite;
+      margin: 20px 0;
     }
 
     @keyframes pulse {
@@ -53,16 +61,15 @@
     }
 
     #result {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       margin-top: 20px;
     }
 
-    /* Galeri Stili */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 15px;
-      margin-top: 50px;
+      margin-top: 40px;
     }
 
     .gallery img {
@@ -77,6 +84,34 @@
       box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
     }
 
+    /* Responsive Metinler */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .countdown {
+        font-size: 1.5rem;
+      }
+
+      .heart {
+        font-size: 2.5rem;
+      }
+
+      #result {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+
+      .gallery img {
+        border-radius: 8px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -84,16 +119,16 @@
   <div class="countdown" id="countdown"></div>
   <div class="heart">❤️</div>
 
-  <h2 style="margin-top: 50px;">💘 Gerçek kalbi bulabilir misin? (ZAMAN GEÇSİN DİYE)</h2>
+  <h2 style="margin-top: 50px;">💘 Gerçek kalbi bulabilir misin? (MAKSAT ZAMAN GEÇSİN)</h2>
   <div id="game"></div>
   <p id="result"></p>
 
-  <h2 style="margin-top: 50px;">🖼️ Bikaç Foti</h2>
+  <h2 style="margin-top: 50px;">🖼️ Anılarımız</h2>
   <div class="gallery">
     <img src="images/biz1.png" alt="Biz 1">
     <img src="images/biz2.png" alt="Biz 2">
     <img src="images/biz3.png" alt="Biz 3">
-    <!-- İstediğin kadar fotoğraf ekleyebilirsin -->
+    <!-- Daha fazla fotoğraf ekleyebilirsin -->
   </div>
 
   <script>
