@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sana Kavuşmama Kalan Zaman 💖</title>
+  <style>
+    body {
+      background: #fff0f5;
+      font-family: 'Courier New', monospace;
+      color: #ff1493;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .countdown {
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+
+    .heart {
+      font-size: 3rem;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    #game {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    #game button {
+      font-size: 2rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    #game button:hover {
+      transform: scale(1.2);
+    }
+
+    #result {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+
+    /* Galeri Stili */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 50px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Sana Kavuşmama Kalan Zaman 💌</h1>
+  <div class="countdown" id="countdown"></div>
+  <div class="heart">❤️</div>
+
+  <h2 style="margin-top: 50px;">💘 Gerçek kalbi bulabilir misin? (ZAMAN GEÇSİN DİYE)</h2>
+  <div id="game"></div>
+  <p id="result"></p>
+
+  <h2 style="margin-top: 50px;">🖼️ Bikaç Foti</h2>
+  <div class="gallery">
+    <img src="images/biz1.png" alt="Biz 1">
+    <img src="images/biz2.png" alt="Biz 2">
+    <img src="images/biz3.png" alt="Biz 3">
+    <!-- İstediğin kadar fotoğraf ekleyebilirsin -->
+  </div>
+
+  <script>
+    // Geri Sayım
+    const hedefTarih = new Date("2025-08-06T00:00:00");
+
+    function guncelleGeriSayim() {
+      const simdi = new Date();
+      const fark = hedefTarih - simdi;
+
+      if (fark <= 0) {
+        document.getElementById("countdown").innerText = "Kavuştuk! 💞";
+        return;
+      }
+
+      const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+      const saat = Math.floor((fark / (1000 * 60 * 60)) % 24);
+      const dakika = Math.floor((fark / (1000 * 60)) % 60);
+      const saniye = Math.floor((fark / 1000) % 60);
+
+      document.getElementById("countdown").innerText =
+        `${gun} gün ${saat} saat ${dakika} dakika ${saniye} saniye kaldı 💖`;
+    }
+
+    setInterval(guncelleGeriSayim, 1000);
+    guncelleGeriSayim();
+
+    // Kalp Oyunu
+    const gameDiv = document.getElementById("game");
+    const resultP = document.getElementById("result");
+    const trueIndex = Math.floor(Math.random() * 12);
+
+    for (let i = 0; i < 12; i++) {
+      const btn = document.createElement("button");
+      btn.innerText = "❤️";
+
+      btn.onclick = () => {
+        if (i === trueIndex) {
+          resultP.innerText = "Doğru kalbi buldun! Kalbim zaten hep senindi 💘";
+        } else {
+          resultP.innerText = "Hayır ben değilim 😛 Bir daha dene!";
+        }
+      };
+
+      gameDiv.appendChild(btn);
+    }
+  </script>
+</body>
+</html>
