@@ -65,51 +65,61 @@
       margin-top: 20px;
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      margin-top: 40px;
+    /* Slider */
+    .slider {
+      position: relative;
+      max-width: 500px;
+      margin: 50px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
     }
 
-    .gallery img {
+    .slide-img {
       width: 100%;
-      border-radius: 10px;
-      transition: transform 0.3s, box-shadow 0.3s;
+      display: none;
+      border-radius: 15px;
+    }
+
+    .slide-img.active {
+      display: block;
+    }
+
+    .slide-controls {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 15px;
+    }
+
+    .slide-controls button {
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      font-size: 1.5rem;
+      border-radius: 50%;
       cursor: pointer;
+      transition: background 0.2s;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+    .slide-controls button:hover {
+      background: rgba(255, 182, 193, 0.8);
     }
 
-    /* Responsive Metinler */
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
       h1 {
         font-size: 2rem;
       }
 
       .countdown {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
       }
 
-      .heart {
-        font-size: 2.5rem;
-      }
-
-      #result {
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      }
-
-      .gallery img {
-        border-radius: 8px;
+      .slide-controls button {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -119,16 +129,20 @@
   <div class="countdown" id="countdown"></div>
   <div class="heart">❤️</div>
 
-  <h2 style="margin-top: 50px;">💘 Gerçek kalbi bulabilir misin? (MAKSAT ZAMAN GEÇSİN)</h2>
+  <h2 style="margin-top: 50px;">💘 Gerçek kalbi bulabilir misin? (ZAMAN GEÇSİN DİYE)</h2>
   <div id="game"></div>
   <p id="result"></p>
 
   <h2 style="margin-top: 50px;">🖼️ Anılarımız</h2>
-  <div class="gallery">
-    <img src="images/biz1.png" alt="Biz 1">
-    <img src="images/biz2.png" alt="Biz 2">
-    <img src="images/biz3.png" alt="Biz 3">
-    <!-- Daha fazla fotoğraf ekleyebilirsin -->
+  <div class="slider">
+    <img src="images/biz1.png" class="slide-img active" alt="Biz 1">
+    <img src="images/biz2.png" class="slide-img" alt="Biz 2">
+    <img src="images/biz3.png" class="slide-img" alt="Biz 3">
+    <!-- Daha fazla ekleyebilirsin -->
+    <div class="slide-controls">
+      <button onclick="prevSlide()">←</button>
+      <button onclick="nextSlide()">→</button>
+    </div>
   </div>
 
   <script>
@@ -175,6 +189,29 @@
 
       gameDiv.appendChild(btn);
     }
+
+    // Slayt Galeri
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".slide-img");
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function prevSlide() {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    // Otomatik geçiş istersen aç:
+    // setInterval(nextSlide, 5000);
   </script>
 </body>
 </html>
